@@ -14,7 +14,6 @@ import { Pagination } from './shared/models/pagination';
 export class AppComponent implements OnInit {
   baseUrl = 'https://localhost:5001/api/';
   private http = inject(HttpClient);
-  private cdr = inject(ChangeDetectorRef);
   protected readonly title = 'Skinet';
   products: Product[] = [];
 
@@ -22,7 +21,6 @@ export class AppComponent implements OnInit {
     this.http.get<Pagination<Product>>(this.baseUrl + 'products').subscribe({
       next: (response) => {
         this.products = response.data;
-        this.cdr.markForCheck();
       },
       error: (error) => {
         console.log(error);
