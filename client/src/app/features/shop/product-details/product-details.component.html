@@ -8,26 +8,30 @@
 
         <div>
           <h1 class="text-2xl font-semibold text-gray-900">{{ product.name }}</h1>
+          <p>You have {{ quantityInCart }} of this item in your cart.</p>
           <div class="mt-4 items-center gap-4 flex">
             <p class="text-3xl font-extrabold text-gray-900">
               {{ product.price | currency }}
             </p>
           </div>
           <div class="flex gap-4 mt-6">
-            <button mat-flat-button class="min-h-14">
+            <button
+              [disabled]="quantity == quantityInCart"
+              (click)="updateCart()"
+              mat-flat-button
+              class="min-h-14"
+            >
               <mat-icon>shopping_cart</mat-icon>
-              Add to cart
+              {{ getButtonText() }}
             </button>
             <mat-form-field appearance="outline" class="flex">
               <mat-label>Quantity</mat-label>
-              <input matInput type="number" />
+              <input matInput min="0" type="number" [(ngModel)]="quantity" />
             </mat-form-field>
           </div>
           <mat-divider></mat-divider>
           <p class="mt-6 text-gray-500">
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Distinctio voluptatem, quod
-            repellendus quibusdam enim cupiditate ad rerum! Sit voluptate tenetur quia earum ipsa
-            voluptatibus necessitatibus temporibus, delectus, saepe eius error!
+            {{ product.description }}
           </p>
         </div>
       </div>
